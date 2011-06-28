@@ -1,0 +1,13 @@
+syntax: glob
+
+*.ipr
+*.iml
+*.iws
+target
+*~
+.DS_Store
+coverage-error.log
+pom.xml.next
+pom.xml.releaseBackup
+pom.xml.tag
+release.properties
