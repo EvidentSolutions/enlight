@@ -25,6 +25,8 @@ package fi.evident.enlight.highlighter.languages;
 import fi.evident.enlight.highlighter.SyntaxHighlighter;
 import org.junit.Test;
 
+import static fi.evident.enlight.highlighter.Tokens.*;
+
 public class ScalaSyntaxTest extends SyntaxTest {
 
     @Override

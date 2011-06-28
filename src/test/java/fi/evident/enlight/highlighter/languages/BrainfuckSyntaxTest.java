@@ -26,6 +26,9 @@ import fi.evident.enlight.highlighter.SyntaxHighlighter;
 import fi.evident.enlight.highlighter.Token;
 import org.junit.Test;
 
+import static fi.evident.enlight.highlighter.Tokens.comment;
+import static fi.evident.enlight.highlighter.Tokens.operator;
+
 public class BrainfuckSyntaxTest extends SyntaxTest {
 
     @Override

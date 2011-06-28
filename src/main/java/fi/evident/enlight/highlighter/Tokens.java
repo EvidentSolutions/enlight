@@ -20,23 +20,43 @@
  * THE SOFTWARE.
  */
 
-package fi.evident.enlight.highlighter.languages;
+package fi.evident.enlight.highlighter;
 
-import fi.evident.enlight.highlighter.SyntaxHighlighter;
-import org.junit.Test;
+public final class Tokens {
 
-import static fi.evident.enlight.highlighter.Tokens.*;
+    private Tokens() { }
 
-public class HaskellSyntaxTest extends SyntaxTest {
+    public static final Token space = whitespace(" ");
 
-    @Override
-    protected SyntaxHighlighter highlighter() {
-        return new HaskellSyntax();
+    public static Token unknown(String value) {
+        return new Token(value, TokenType.UNKNOWN);
     }
 
-    @Test
-    public void allowPrimesInIdentifiers() {
-        assertThatHighlighting("foo' 'b' bar''",
-                producesTokens(unknown("foo'"), space, string("'b'"), space, unknown("bar''")));
+    public static Token operator(String value) {
+        return new Token(value, TokenType.OPERATOR);
     }
+
+    public static Token whitespace(String value) {
+        return new Token(value, TokenType.WHITESPACE);
+    }
+
+    public static Token number(String value) {
+        return new Token(value, TokenType.LITERAL_NUMBER);
+    }
+
+    public static Token keyword(String value) {
+        return new Token(value, TokenType.KEYWORD);
+    }
+
+    public static Token string(String value) {
+        return new Token(value, TokenType.LITERAL_STRING);
+    }
+
+    public static Token comment(String value) {
+        return new Token(value, TokenType.COMMENT);
+    }
+
+    public static Token punctuation(String value) {
+        return new Token(value, TokenType.PUNCTUATION);
+    }    
 }

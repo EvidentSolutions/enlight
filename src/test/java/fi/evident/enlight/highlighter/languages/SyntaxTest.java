@@ -34,40 +34,6 @@ import static org.junit.Assert.assertThat;
 
 public abstract class SyntaxTest {
 
-    protected static Token unknown(String value) {
-        return new Token(value, TokenType.UNKNOWN);
-    }
-
-    protected static Token operator(String value) {
-        return new Token(value, TokenType.OPERATOR);
-    }
-
-    protected static Token whitespace(String value) {
-        return new Token(value, TokenType.WHITESPACE);
-    }
-
-    protected static Token number(String value) {
-        return new Token(value, TokenType.LITERAL_NUMBER);
-    }
-
-    protected static Token keyword(String value) {
-        return new Token(value, TokenType.KEYWORD);
-    }
-
-    protected static Token string(String value) {
-        return new Token(value, TokenType.LITERAL_STRING);
-    }
-
-    protected static Token comment(String value) {
-        return new Token(value, TokenType.COMMENT);
-    }
-
-    protected static Token punctuation(String value) {
-        return new Token(value, TokenType.PUNCTUATION);
-    }
-
-    protected static final Token space = whitespace(" ");
-
     protected abstract SyntaxHighlighter highlighter();
 
     protected void assertThatHighlighting(String source, Matcher<List<Token>> matcher) {

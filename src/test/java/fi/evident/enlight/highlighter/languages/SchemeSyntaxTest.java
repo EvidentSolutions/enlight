@@ -25,6 +25,8 @@ package fi.evident.enlight.highlighter.languages;
 import fi.evident.enlight.highlighter.SyntaxHighlighter;
 import org.junit.Test;
 
+import static fi.evident.enlight.highlighter.Tokens.*;
+
 public class SchemeSyntaxTest extends SyntaxTest {
     @Override
     protected SyntaxHighlighter highlighter() {
