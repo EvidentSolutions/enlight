@@ -32,6 +32,8 @@ import static java.util.Arrays.asList;
 public final class LanguageRecognizer {
 
     private final List<LanguageMatcher> matchers = asList(
+        regexpMatcher("^#!.*python", Language.PYTHON),
+        regexpMatcher("^#!.*ruby", Language.RUBY),
         stringMatcher("import scala.", Language.SCALA),
         stringMatcher("public static void main(", Language.JAVA),
         stringMatcher("static void Main()", Language.CSHARP),
@@ -42,6 +44,7 @@ public final class LanguageRecognizer {
         regexpMatcher("def [a-zA-Z_][a-zA-Z_0-9]*\\(self[\\),]", Language.PYTHON),
         stringMatcher("System.out.println(", Language.JAVA),
         stringMatcher("import java.", Language.JAVA),
+        stringMatcher("#import ", Language.OBJECTIVEC),
         stringMatcher("using std", Language.CPLUSPLUS),
         stringMatcher("#include <stdio.h>", Language.C),
         regexpMatcher("[a-zA-Z]\\s*:\\s*\\d+(px|em|pt|ex|%|in|pc|mm|cm)", Language.CSS),
