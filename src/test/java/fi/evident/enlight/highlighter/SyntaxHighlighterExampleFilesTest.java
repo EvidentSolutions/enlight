@@ -33,6 +33,7 @@ import org.junit.runners.Parameterized;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
+import java.util.Set;
 
 import static fi.evident.enlight.utils.IOUtils.extensionOf;
 import static fi.evident.enlight.utils.IOUtils.readFile;
@@ -58,9 +59,10 @@ public class SyntaxHighlighterExampleFilesTest {
     @Test
     public void fileMustBeHighlightedWithoutExceptions() throws IOException {
         String extension = extensionOf(file);
-        Language language = Language.forExtension(extension);
+        Set<Language> languages = Language.forExtension(extension);
 
-        assertNotNull("Could not find language for extension '" + extension + "'", language);
+        assertThat("Expected unique language for '" + extension + "'", languages.size(), is(1));
+        Language language = languages.iterator().next();
 
         String originalSource = readFile(file);
 

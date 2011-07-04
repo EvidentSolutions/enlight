@@ -24,11 +24,14 @@ package fi.evident.enlight;
 
 import org.junit.Test;
 
+import java.util.Collections;
+
 import static fi.evident.enlight.Language.CPLUSPLUS;
 import static fi.evident.enlight.utils.CollectionUtils.asSet;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.nullValue;
 import static org.junit.Assert.assertThat;
+import static org.junit.matchers.JUnitMatchers.hasItem;
 
 public class LanguageTest {
 
@@ -51,11 +54,11 @@ public class LanguageTest {
 
     @Test
     public void supportsLookupByFilenameExtension() {
-        assertThat(Language.forExtension("cpp"), is(CPLUSPLUS));
+        assertThat(Language.forExtension("cpp"), hasItem(CPLUSPLUS));
     }
 
     @Test
-    public void lookupWithUnknownExtensionReturnsNull() {
-        assertThat(Language.forExtension("foo"), is(nullValue(Language.class)));
+    public void lookupWithUnknownExtensionReturnsEmptySet() {
+        assertThat(Language.forExtension("foo"), is(Collections.<Language>emptySet()));
     }
 }

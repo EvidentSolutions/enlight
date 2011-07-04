@@ -25,6 +25,7 @@ package fi.evident.enlight;
 import fi.evident.enlight.highlighter.SyntaxHighlighter;
 import fi.evident.enlight.highlighter.languages.*;
 
+import java.util.EnumSet;
 import java.util.Set;
 
 import static fi.evident.enlight.utils.CollectionUtils.asSet;
@@ -54,7 +55,7 @@ public enum Language {
     // Perl
     PHP("PHP",                 new PHPSyntax(),           "php"),
     // Prolog
-    OBJECTIVEC("Objective-C",  new ObjectiveCSyntax(),    "m"),
+    OBJECTIVEC("Objective-C",  new ObjectiveCSyntax(),    "m", "h"),
     PYTHON("Python",           new PythonSyntax(),        "py"),
     // R
     RUBY("Ruby",               new RubySyntax(),          "rb"),
@@ -90,12 +91,17 @@ public enum Language {
         return null;
     }
 
-    public static Language forExtension(String extension) {
+    /**
+     * Returns languages that use given extension.
+     */
+    public static Set<Language> forExtension(String extension) {
+        Set<Language> result = EnumSet.noneOf(Language.class);
+        
         for (Language language : values())
             if (language.getExtensions().contains(extension))
-                return language;
+                result.add(language);
 
-        return null;
+        return result;
     }
 
     public String getName() {

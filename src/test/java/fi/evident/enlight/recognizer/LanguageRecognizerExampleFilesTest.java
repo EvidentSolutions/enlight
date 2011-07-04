@@ -25,6 +25,7 @@ package fi.evident.enlight.recognizer;
 import fi.evident.enlight.Language;
 import fi.evident.enlight.testutils.TestFiles;
 import org.junit.Test;
+import org.junit.matchers.JUnitMatchers;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.junit.runners.Parameterized.Parameters;
@@ -32,12 +33,14 @@ import org.junit.runners.Parameterized.Parameters;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
+import java.util.Set;
 
 import static fi.evident.enlight.utils.IOUtils.extensionOf;
 import static fi.evident.enlight.utils.IOUtils.readFile;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertThat;
+import static org.junit.matchers.JUnitMatchers.hasItem;
 
 @RunWith(Parameterized.class)
 public class LanguageRecognizerExampleFilesTest {
@@ -57,11 +60,11 @@ public class LanguageRecognizerExampleFilesTest {
     @Test
     public void fileMustBeParsedAndDetectedSuccessfully() throws IOException {
         String extension = extensionOf(file);
-        Language language = Language.forExtension(extension);
-
-        assertNotNull("Could not find language for extension '" + extension + "'", language);
+        Set<Language> languages = Language.forExtension(extension);
 
         String source = readFile(file);
-        assertThat(recognizer.recognizeLanguage(source), is(language));
+
+        Language language = recognizer.recognizeLanguage(source);
+        assertThat(languages, hasItem(language));
     }
 }
