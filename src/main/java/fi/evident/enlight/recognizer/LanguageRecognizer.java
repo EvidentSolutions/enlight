@@ -22,12 +22,12 @@
 
 package fi.evident.enlight.recognizer;
 
-import static java.util.Arrays.asList;
+import fi.evident.enlight.Language;
 
 import java.util.List;
 import java.util.regex.Pattern;
 
-import fi.evident.enlight.Language;
+import static java.util.Arrays.asList;
 
 public final class LanguageRecognizer {
 
@@ -44,7 +44,7 @@ public final class LanguageRecognizer {
         stringMatcher("import java.", Language.JAVA),
         stringMatcher("using std", Language.CPLUSPLUS),
         stringMatcher("#include <stdio.h>", Language.C),
-        regexpMatcher(":\\s*\\d+(px|em|pt|ex|%|in|pc|mm|cm)", Language.CSS),
+        regexpMatcher("[a-zA-Z]\\s*:\\s*\\d+(px|em|pt|ex|%|in|pc|mm|cm)", Language.CSS),
         regexpMatcher("\\$\\(function\\(\\)\\s*\\{", Language.JAVASCRIPT),
         stringMatcher("jQuery", Language.JAVASCRIPT),
         stringMatcher("<?php", Language.PHP),
