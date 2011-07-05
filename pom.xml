@@ -10,6 +10,7 @@
 
     <modules>
         <module>enlight</module>
+        <module>detector-test</module>
     </modules>
 
     <properties>
@@ -31,6 +32,12 @@
 
     <dependencyManagement>
         <dependencies>
+            <dependency>
+                <groupId>${project.groupId}</groupId>
+                <artifactId>enlight</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
             <dependency>
                 <groupId>junit</groupId>
                 <artifactId>junit</artifactId>
