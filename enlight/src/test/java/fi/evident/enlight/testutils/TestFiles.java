@@ -24,16 +24,19 @@ package fi.evident.enlight.testutils;
 
 import java.io.File;
 import java.io.FileFilter;
+import java.net.URL;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import static java.util.Arrays.asList;
 
 public class TestFiles {
-    
+
+    private static File moduleDirectory;
+
     public static List<File> findExampleFiles() {
-        // TODO: this assumes that we are executing the tests in the base directory of the project
-        File file = new File("src/test/examples");
+        File file = new File(getModuleDirectory(), "src/test/examples");
         return asList(file.listFiles(new FileFilter() {
             @Override
             public boolean accept(File file) {
@@ -48,5 +51,28 @@ public class TestFiles {
         for (File file : files)
             data.add(new Object[] { file } );
         return data;
+    }
+
+    private static File getModuleDirectory() {
+        if (moduleDirectory == null)
+            moduleDirectory = locateModuleDirectory();
+        return moduleDirectory;
+    }
+
+    private static File locateModuleDirectory() {
+        // To find out base directory for our module, we first try to find out 'test-resource-marker.txt' from
+        // classpath. Depending on the runner, it might included in the classpath directory from src/test/resources
+        // or it could be copied somewhere else. However, most probably it is somewhere below our module directory,
+        // so we'll keep going up the directory hierarchy until we find out a directory with 'pom.xml'.
+
+        URL url = TestFiles.class.getResource("/test-resource-marker.txt");
+        if (url == null)
+            throw new RuntimeException("could not find test-resource-marker.txt");
+
+        for (File dir = new File(url.getFile()).getParentFile(); dir != null; dir = dir.getParentFile())
+            if (Arrays.asList(dir.list()).contains("pom.xml"))
+                return dir;
+
+        throw new RuntimeException("could not locate module root directory");
     }
 }
