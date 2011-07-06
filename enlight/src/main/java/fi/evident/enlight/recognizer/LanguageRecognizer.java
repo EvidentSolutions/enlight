@@ -22,12 +22,12 @@
 
 package fi.evident.enlight.recognizer;
 
-import fi.evident.enlight.Language;
+import static java.util.Arrays.asList;
 
 import java.util.List;
 import java.util.regex.Pattern;
 
-import static java.util.Arrays.asList;
+import fi.evident.enlight.Language;
 
 public final class LanguageRecognizer {
 
@@ -47,14 +47,17 @@ public final class LanguageRecognizer {
         stringMatcher("#import ", Language.OBJECTIVEC),
         stringMatcher("using std", Language.CPLUSPLUS),
         stringMatcher("#include <stdio.h>", Language.C),
+        stringMatcher("<!DOCTYPE html", Language.HTML),
+        stringMatcher("<html", Language.HTML),
+        stringMatcher("<a href=", Language.HTML),
+        regexpMatcher("<(div|span|p|table|tr|h\\d)>", Language.HTML),
+        stringMatcher("<?xml ", Language.XML),
         regexpMatcher("[a-zA-Z]\\s*:\\s*\\d+(px|em|pt|ex|%|in|pc|mm|cm)", Language.CSS),
         regexpMatcher("\\$\\(function\\(\\)\\s*\\{", Language.JAVASCRIPT),
         stringMatcher("jQuery", Language.JAVASCRIPT),
         stringMatcher("<?php", Language.PHP),
         stringMatcher("(defun ", Language.COMMON_LISP),
         stringMatcher("(define (", Language.SCHEME),
-        stringMatcher("<html", Language.HTML),
-        stringMatcher("<?xml ", Language.XML),
         regexpMatcher("class \\w+(\\[[,\\s\\w]+\\])\\((var|val)\\)?", Language.SCALA),
         regexpMatcher("trait \\w+", Language.SCALA),
         regexpMatcher("(?m)^\\w+\\s*::\\s*\\w -> \\w", Language.HASKELL));
