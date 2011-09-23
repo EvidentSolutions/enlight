@@ -78,11 +78,34 @@ public abstract class CommonSyntax extends TokenMatcherBasedSyntaxHighlighter {
     }
 
     protected StringMatcher literalStringSingle() {
-        return regex("'((\\\\.)|[^'\\\\])*'");
+        return literalString('\'');
     }
 
     protected StringMatcher literalStringDouble() {
-        return regex("\\\"((\\\\.)|[^\"\\\\])*\\\"");
+        return literalString('"');
+    }
+
+    private static StringMatcher literalString(final char quote) {
+        return new StringMatcher() {
+            @Override
+            public String match(String input) {
+                if (input.isEmpty() || input.charAt(0) != quote) return null;
+
+                boolean escape = false;
+                for (int i = 1; i < input.length(); i++) {
+                    char ch = input.charAt(i);
+                    if (escape) {
+                        escape = false;
+                    } else if (ch == '\\') {
+                        escape = true;
+                    } else if (ch == quote) {
+                        return input.substring(0, i+1);
+                    }
+                }
+
+                return null;
+            }
+        };
     }
 
     protected StringMatcher punctuation() {
