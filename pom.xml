@@ -63,4 +63,10 @@
             </extension>
         </extensions>
     </build>
+
+    <scm>
+      <url>https://bitbucket.org/evidentsolutions/enlight</url>
+      <connection>scm:hg:https://bitbucket.org/evidentsolutions/enlight</connection>
+      <developerConnection>scm:hg:ssh://hg@bitbucket.org/evidentsolutions/enlight</developerConnection>
+    </scm>
 </project>
