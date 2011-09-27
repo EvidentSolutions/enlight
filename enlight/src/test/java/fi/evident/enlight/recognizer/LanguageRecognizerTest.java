@@ -35,7 +35,7 @@ public class LanguageRecognizerTest {
 
     @Test(expected = IllegalArgumentException.class)
     public void throwExceptionForNullSource() {
-        recognizer.recognizeLanguage(null);
+        recognizer.recognizeLanguage((String) null);
     }
 
     @Test

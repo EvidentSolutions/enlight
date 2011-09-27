@@ -22,15 +22,17 @@
 
 package fi.evident.enlight.recognizer;
 
-import static fi.evident.enlight.utils.PathUtils.extensionFor;
-import static java.util.Arrays.asList;
+import fi.evident.enlight.Language;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
 import java.util.Set;
 import java.util.regex.Pattern;
 
-import fi.evident.enlight.Language;
-import fi.evident.enlight.utils.PathUtils;
+import static fi.evident.enlight.utils.IOUtils.readFile;
+import static fi.evident.enlight.utils.PathUtils.extensionFor;
+import static java.util.Arrays.asList;
 
 public final class LanguageRecognizer {
 
@@ -80,15 +82,31 @@ public final class LanguageRecognizer {
 
         Set<Language> candidates = Language.forExtension(extensionFor(fileName));
 
+        if (candidates.size() == 1)
+            return candidates.iterator().next();
+        else
+            return recognizeFromCandidates(source, candidates);
+    }
+
+    public Language recognizeLanguage(File file) throws IOException {
+        if (file == null) throw new IllegalArgumentException("null file");
+
+        Set<Language> candidates = Language.forExtension(extensionFor(file));
+
         if (candidates.size() == 1) {
             return candidates.iterator().next();
         } else {
-            for (LanguageMatcher matcher : matchers)
-                if (candidates.contains(matcher.language) && matcher.matches(source))
-                    return matcher.language;
-
-            return null;
+            String source = readFile(file);
+            return recognizeFromCandidates(source, candidates);
         }
+    }
+
+    private Language recognizeFromCandidates(String source, Set<Language> candidates) {
+        for (LanguageMatcher matcher : matchers)
+            if (candidates.contains(matcher.language) && matcher.matches(source))
+                return matcher.language;
+
+        return null;
     }
 
     private static LanguageMatcher stringMatcher(String regex, Language language) {

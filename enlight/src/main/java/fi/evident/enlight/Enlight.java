@@ -26,6 +26,9 @@ import fi.evident.enlight.highlighter.HighlightedSource;
 import fi.evident.enlight.highlighter.SyntaxHighlighter;
 import fi.evident.enlight.recognizer.LanguageRecognizer;
 
+import java.io.File;
+import java.io.IOException;
+
 /**
  * Facade for common functionality.
  */
@@ -50,7 +53,7 @@ public final class Enlight {
      * Tries to detect the language according to various heuristics.
      *
      * @param source Source code to recognize
-     * @return Recognized language, or null if language source could not be recognized.
+     * @return Recognized language, or null if language could not be recognized.
      */
     public static Language recognizeLanguage(String source) {
         return recognizer.recognizeLanguage(source);
@@ -62,9 +65,21 @@ public final class Enlight {
      *
      * @param fileName name of the source file
      * @param source code to recognize
-     * @return Recognized language, or null if language source could not be recognized.
+     * @return Recognized language, or null if language could not be recognized.
      */
     public static Language recognizeLanguage(String fileName, String source) {
         return recognizer.recognizeLanguage(fileName, source);
+    }
+
+    /**
+     * Tries to detect the language of given file, first based on the name and
+     * then by reading the file if file name is ambiguous.
+     *
+     * @param file to recognize
+     * @return Recognized language, or null if language could not be recognized.
+     * @throws IOException if reading the file fails
+     */
+    public static Language recognizeLanguage(File file) throws IOException {
+        return recognizer.recognizeLanguage(file);
     }
 }
