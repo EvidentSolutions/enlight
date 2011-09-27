@@ -25,7 +25,6 @@ package fi.evident.enlight.highlighter.support;
 import fi.evident.enlight.highlighter.HighlightedSource;
 import fi.evident.enlight.highlighter.SyntaxHighlighter;
 import fi.evident.enlight.highlighter.Token;
-import fi.evident.enlight.highlighter.TokenType;
 
 import java.util.List;
 
@@ -45,7 +44,7 @@ public abstract class SyntaxHighlighterBase extends SyntaxHighlighter {
     public final HighlightedSource highlight(String src) {
         String source = src.replace("\r\n", "\n");
 
-        Iterable<Token> tokens = mergeUnknownTokens(tokensForSource(source));
+        Iterable<Token> tokens = new UnknownMergingTokenStream(tokensForSource(source));
 
         List<List<Token>> lines = LineSequenceBuilder.normalizeTokensToLines(tokens);
 
@@ -58,18 +57,4 @@ public abstract class SyntaxHighlighterBase extends SyntaxHighlighter {
      */
     protected abstract Iterable<Token> tokensForSource(String source);
 
-    /**
-     * Merges consecutive unknown tokens into a single unknown token.
-     */
-    private static List<Token> mergeUnknownTokens(Iterable<Token> tokens) {
-        TokenListBuilder result = new TokenListBuilder();
-
-        for (Token token : tokens)
-            if (token.getTokenType() == TokenType.UNKNOWN)
-                result.addToUnknown(token.getText());
-            else
-                result.addToken(token);
-
-        return result.toList();
-    }
 }
