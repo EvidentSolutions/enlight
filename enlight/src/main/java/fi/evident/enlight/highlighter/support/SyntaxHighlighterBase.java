@@ -33,7 +33,7 @@ import java.util.List;
  * A simple base trait for syntax-highlighters that will make implementation
  * somewhat simpler. The subclass can return tokens that span multiple lines
  * and this trait will take care of normalizing the tokens and creating
- * a HighlightedSource.
+ * a {@link HighlightedSource}.
  */
 public abstract class SyntaxHighlighterBase extends SyntaxHighlighter {
 
@@ -58,6 +58,9 @@ public abstract class SyntaxHighlighterBase extends SyntaxHighlighter {
      */
     protected abstract Iterable<Token> tokensForSource(String source);
 
+    /**
+     * Merges consecutive unknown tokens into a single unknown token.
+     */
     private static List<Token> mergeUnknownTokens(Iterable<Token> tokens) {
         TokenListBuilder result = new TokenListBuilder();
 

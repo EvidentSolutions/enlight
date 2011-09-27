@@ -28,10 +28,22 @@ import fi.evident.enlight.highlighter.TokenType;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ * A simple combinator for matching strings.
+ */
 public abstract class StringMatcher {
 
+    /**
+     * Tries to match the prefix of given input-string. Returns the
+     * matched prefix or null if input could not be matched.
+     */
     public abstract String match(String input);
 
+    /**
+     * Converts this matcher to a corresponding {@link TokenMatcher}.
+     * The returned matcher will match tokens defined by this matcher and
+     * will return them as {@link Token}s of given {@link TokenType}.
+     */
     public TokenMatcher toTokenMatcher(final TokenType type) {
         return new TokenMatcher() {
             @Override
