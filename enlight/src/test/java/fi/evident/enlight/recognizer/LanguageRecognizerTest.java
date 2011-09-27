@@ -49,4 +49,14 @@ public class LanguageRecognizerTest {
 
         assertThat(recognizer.recognizeLanguage(code), is(Language.JAVA));
     }
+
+    @Test
+    public void recognizeCodeBasedOnFileName() {
+        assertThat(recognizer.recognizeLanguage("foo.java", ""), is(Language.JAVA));
+    }
+
+    @Test
+    public void recognizeCodeBasedOnFileNameAndContents() {
+        assertThat(recognizer.recognizeLanguage("foo.h", "#import <bar.h>"), is(Language.OBJECTIVEC));
+    }
 }

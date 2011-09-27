@@ -37,6 +37,10 @@ public final class Enlight {
 
     /**
      * Highlights given source code as given language.
+     *
+     * @param source code to highlight
+     * @param language to highlight the source as
+     * @return Highlighted representation of the source code
      */
     public static HighlightedSource highlight(String source, Language language) {
         return SyntaxHighlighter.highlight(source, language);
@@ -45,9 +49,22 @@ public final class Enlight {
     /**
      * Tries to detect the language according to various heuristics.
      *
+     * @param source Source code to recognize
      * @return Recognized language, or null if language source could not be recognized.
      */
     public static Language recognizeLanguage(String source) {
         return recognizer.recognizeLanguage(source);
+    }
+
+    /**
+     * Tries to detect language first based on the fileName and source-code. The source
+     * code is only used to disambiguate potentially conflicting extensions.
+     *
+     * @param fileName name of the source file
+     * @param source code to recognize
+     * @return Recognized language, or null if language source could not be recognized.
+     */
+    public static Language recognizeLanguage(String fileName, String source) {
+        return recognizer.recognizeLanguage(fileName, source);
     }
 }

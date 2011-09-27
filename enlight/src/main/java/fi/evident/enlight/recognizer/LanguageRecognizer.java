@@ -22,12 +22,15 @@
 
 package fi.evident.enlight.recognizer;
 
+import static fi.evident.enlight.utils.PathUtils.extensionFor;
 import static java.util.Arrays.asList;
 
 import java.util.List;
+import java.util.Set;
 import java.util.regex.Pattern;
 
 import fi.evident.enlight.Language;
+import fi.evident.enlight.utils.PathUtils;
 
 public final class LanguageRecognizer {
 
@@ -65,11 +68,27 @@ public final class LanguageRecognizer {
     public Language recognizeLanguage(String source) {
         if (source == null) throw new IllegalArgumentException("null source");
 
-        for (LanguageMatcher matcher : matchers) {
+        for (LanguageMatcher matcher : matchers)
             if (matcher.matches(source))
                 return matcher.language;
-        }
+
         return null;
+    }
+
+    public Language recognizeLanguage(String fileName, String source) {
+        if (source == null) throw new IllegalArgumentException("null source");
+
+        Set<Language> candidates = Language.forExtension(extensionFor(fileName));
+
+        if (candidates.size() == 1) {
+            return candidates.iterator().next();
+        } else {
+            for (LanguageMatcher matcher : matchers)
+                if (candidates.contains(matcher.language) && matcher.matches(source))
+                    return matcher.language;
+
+            return null;
+        }
     }
 
     private static LanguageMatcher stringMatcher(String regex, Language language) {
