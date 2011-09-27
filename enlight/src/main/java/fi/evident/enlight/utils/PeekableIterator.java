@@ -1,6 +1,7 @@
 package fi.evident.enlight.utils;
 
 import java.util.Iterator;
+import java.util.NoSuchElementException;
 
 /**
  * An iterator that allows peeking the next element without consuming it.
@@ -24,7 +25,7 @@ public final class PeekableIterator<T> implements Iterator<T> {
 
     @Override
     public T next() {
-        if (!hasNext()) throw new IllegalStateException();
+        if (!hasNext()) throw new NoSuchElementException();
 
         if (peeked) {
             peeked = false;
@@ -35,7 +36,7 @@ public final class PeekableIterator<T> implements Iterator<T> {
     }
     
     public T peek() {
-        if (!hasNext()) throw new IllegalStateException();
+        if (!hasNext()) throw new NoSuchElementException();
 
         if (!peeked) {
             peeked = true;
