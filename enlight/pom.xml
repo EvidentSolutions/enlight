@@ -10,7 +10,7 @@
     <parent>
         <groupId>fi.evident.enlight</groupId>
         <artifactId>enlight-root</artifactId>
-        <version>0.2.2</version>
+        <version>0.2.3-SNAPSHOT</version>
     </parent>
 
     <dependencies>
