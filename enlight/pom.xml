@@ -5,25 +5,13 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>fi.evident.enlight</groupId>
     <artifactId>enlight</artifactId>
+    <name>Enlight</name>
 
     <parent>
         <groupId>fi.evident.enlight</groupId>
         <artifactId>enlight-root</artifactId>
         <version>0.2.2-SNAPSHOT</version>
     </parent>
-
-    <organization>
-        <name>Evident Solutions Oy</name>
-        <url>http://www.evident.fi</url>
-    </organization>
-
-    <licenses>
-        <license>
-            <name>MIT</name>
-            <url>http://www.opensource.org/licenses/mit-license.php</url>
-            <distribution>repo</distribution>
-        </license>
-    </licenses>
 
     <dependencies>
         <dependency>
