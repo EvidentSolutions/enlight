@@ -1,5 +1,6 @@
-Enlight is a library that provides syntax highlighting (basically tokenization)
-and source code detection for various languages.
+# Enlight
+
+Enlight is a library that provides syntax highlighting and source code detection for various languages.
 
 # Getting started
 
