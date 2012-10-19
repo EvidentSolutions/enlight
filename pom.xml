@@ -12,7 +12,7 @@
 
     <groupId>fi.evident.enlight</groupId>
     <artifactId>enlight-root</artifactId>
-    <version>0.2.2-SNAPSHOT</version>
+    <version>0.2.2</version>
     <packaging>pom</packaging>
 
     <name>Enlight root</name>
@@ -179,6 +179,6 @@
         <url>https://bitbucket.org/evidentsolutions/enlight</url>
         <connection>scm:hg:https://bitbucket.org/evidentsolutions/enlight</connection>
         <developerConnection>scm:hg:ssh://hg@bitbucket.org/evidentsolutions/enlight</developerConnection>
-        <tag>HEAD</tag>
+        <tag>enlight-0.2.2</tag>
     </scm>
 </project>
