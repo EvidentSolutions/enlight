@@ -2,6 +2,8 @@
 
 Enlight is a library that provides syntax highlighting and source code detection for various languages.
 
+[![Build Status](https://drone.io/bitbucket.org/evidentsolutions/enlight/status.png)](https://drone.io/bitbucket.org/evidentsolutions/enlight/latest)
+
 # Get started
 
 The facade class `fi.evident.enlight.Enlight` is an entry-point to all functionality.
