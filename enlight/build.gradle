@@ -3,8 +3,6 @@ apply plugin: 'maven-publish'
 apply plugin: 'signing'
 
 description = 'Syntax highlighting and source code detection for various languages.'
-group = 'fi.evident.enlight'
-version = '0.2.3-SNAPSHOT'
 
 dependencies {
     testCompile group: 'junit', name: 'junit', version: '4.8.2'
