@@ -187,8 +187,8 @@
 
     <scm>
         <url>https://bitbucket.org/evidentsolutions/enlight</url>
-        <connection>scm:hg:https://bitbucket.org/evidentsolutions/enlight</connection>
-        <developerConnection>scm:hg:ssh://hg@bitbucket.org/evidentsolutions/enlight</developerConnection>
+        <connection>scm:git:https://bitbucket.org/evidentsolutions/enlight.git</connection>
+        <developerConnection>scm:git:ssh://hg@bitbucket.org/evidentsolutions/enlight.git</developerConnection>
         <tag>HEAD</tag>
     </scm>
 </project>
