@@ -36,7 +36,7 @@ public class TestFiles {
     private static File moduleDirectory;
 
     public static List<File> findExampleFiles() {
-        File file = new File(getModuleDirectory(), "src/test/examples");
+        File file = new File(getModuleDirectory(), "enlight/src/test/examples");
         return asList(file.listFiles(new FileFilter() {
             @Override
             public boolean accept(File file) {
@@ -70,7 +70,7 @@ public class TestFiles {
             throw new RuntimeException("could not find test-resource-marker.txt");
 
         for (File dir = new File(url.getFile()).getParentFile(); dir != null; dir = dir.getParentFile())
-            if (Arrays.asList(dir.list()).contains("pom.xml"))
+            if (Arrays.asList(dir.list()).contains("settings.gradle"))
                 return dir;
 
         throw new RuntimeException("could not locate module root directory");
